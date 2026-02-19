@@ -90,6 +90,39 @@ button{
   margin: 5px 0 0;
   font-weight: bold;
   color: #00ffc8;
+}.grid-paquetes{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:25px;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.burbuja{
+  background: linear-gradient(145deg, #14265c, #1b3275);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow: 0 0 25px rgba(0,255,170,0.15);
+  transition:0.3s;
+}
+
+.burbuja:hover{
+  transform:translateY(-8px);
+  box-shadow: 0 0 40px rgba(0,255,170,0.4);
+}
+
+.burbuja h3{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.burbuja p{
+  font-size:18px;
+  color:#00ffaa;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -235,6 +268,7 @@ function iniciarConsulta(){
 </body>
 
 </html>
+
 
 
 

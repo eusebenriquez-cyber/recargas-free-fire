@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recargas Free Fire Bolivia</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0a0f1f;
+  color:#fff;
+  text-align:center;
+}
+
+header{
+  padding:25px;
+  background:linear-gradient(90deg,#7c5cff,#00e39a);
+  font-size:22px;
+  font-weight:bold;
+}
+
+section{padding:25px;}
+
+.card{
+  max-width:500px;
+  margin:auto;
+  background:#111933;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 0 20px rgba(124,92,255,.3);
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.2);
+  background:#0a0f1f;
+  color:#fff;
+}
+
+button{
+  margin-top:15px;
+  padding:12px 20px;
+  border-radius:999px;
+  border:0;
+  background:#00e39a;
+  color:#001b10;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.estado{
+  margin-top:15px;
+  padding:10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.1);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🔥 Recargas Free Fire Bolivia 🔥
+</header>
+
+<section>
+<div class="card">
+
+<h3>Comprar recarga</h3>
+
+<input id="jugador" placeholder="ID del jugador">
+
+<select id="monto">
+  <option value="10">10 Bs</option>
+  <option value="20">20 Bs</option>
+  <option value="50">50 Bs</option>
+  <option value="100">100 Bs</option>
+</select>
+
+<button onclick="crearPedido()">Generar Pedido</button>
+
+<div id="pedidoInfo"></div>
+
+</div>
+</section>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbwIuwqCE9Somn_ISJX7GheaBUls5xv6nY6MgF5npONYPc81BSLYeLDFMwHxWEE8F-1S/exec";
+
+async function apiCall(payload){
+  const res = await fetch(API_URL, {
+    method:"POST",
+    headers:{ "Content-Type":"text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  });
+  return await res.json();
+}
+
+let pedidoID = null;
+
+async function crearPedido(){
+  const jugador = document.getElementById("jugador").value;
+  const monto = document.getElementById("monto").value;
+
+  if(!jugador){
+    alert("Ingresa tu ID de jugador");
+    return;
+  }
+
+  const r = await apiCall({
+    action:"create",
+    jugador,
+    monto
+  });
+
+  if(r.ok){
+    pedidoID = r.id;
+
+    document.getElementById("pedidoInfo").innerHTML = `
+      <p><strong>Código:</strong> ${r.id}</p>
+      <p>Escanea el QR y paga exactamente ${monto} Bs</p>
+      <img src="qr.png" width="250">
+      <div class="estado" id="estado">Estado: PENDIENTE</div>
+    `;
+
+    iniciarConsulta();
+  }
+}
+
+async function consultarEstado(){
+  if(!pedidoID) return;
+
+  const r = await apiCall({
+    action:"check",
+    id:pedidoID
+  });
+
+  if(r.ok){
+    document.getElementById("estado").innerHTML = "Estado: " + r.estado;
+  }
+}
+
+function iniciarConsulta(){
+  setInterval(consultarEstado, 4000);
+}
+</script>
+
+</body>
+</html>

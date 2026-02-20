@@ -433,13 +433,13 @@
     const API_URL = "https://script.google.com/macros/s/AKfycbwIuwqCE9Somn_ISJX7GheaBUls5xv6nY6MgF5npONYPc81BSLYeLDFMwHxWEE8F-1S/exec";
 
     const PACKS = [
-      { label: "100 + 10 💎",  bs: 9,   tag: },
-      { label: "310 + 31 💎",  bs: 30,  tag: },
-      { label: "520 + 52 💎",  bs: 41,  tag: },
-      { label: "1060 + 106 💎", bs: 81, tag: },
-      { label: "2180 + 218 💎", bs: 162, tag: },
-      { label: "5600 + 560 💎", bs: 395, tag: },
-      { label: "Pase Booyah",  bs: 16,  tag: }
+      { label: "100 + 10 💎",  bs: 9 },
+      { label: "310 + 31 💎",  bs: 30 },
+      { label: "520 + 52 💎",  bs: 41 },
+      { label: "1060 + 106 💎", bs: 81 },
+      { label: "2180 + 218 💎", bs: 162 },
+      { label: "5600 + 560 💎", bs: 395 },
+      { label: "Pase Booyah",  bs: 16 }
     ];
 
     const $ = (id) => document.getElementById(id);
@@ -465,7 +465,7 @@
         <div class="pack ${i===0 ? "active" : ""}" data-i="${i}" role="button" tabindex="0">
           <div class="packTop">
             <span>${p.label}</span>
-            <span class="tag">${p.tag}</span>
+          
           </div>
           <div class="price">${p.bs} Bs</div>
         </div>

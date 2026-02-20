@@ -9,22 +9,22 @@
     :root{
       --bg:#070a12;
       --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.08);
+      --panel2: rgba(255,255,255,.09);
       --border: rgba(255,255,255,.12);
-      --text:#eaf0ff;
-      --muted: rgba(234,240,255,.72);
-      --accent:#00e39a;
-      --accent2:#4dd6ff;
+      --txt:#eaf0ff;
+      --muted: rgba(234,240,255,.70);
+      --a:#00e39a;
+      --b:#4dd6ff;
       --warn:#ffcc66;
       --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 18px;
+      --r: 18px;
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
+      color:var(--txt);
       background:
         radial-gradient(900px 500px at 20% 10%, rgba(77,214,255,.18), transparent 60%),
         radial-gradient(900px 500px at 80% 0%, rgba(0,227,154,.18), transparent 55%),
@@ -34,14 +34,14 @@
     }
 
     .topbar{
-      position:sticky; top:0; z-index:50;
+      position:sticky; top:0; z-index:20;
       backdrop-filter: blur(12px);
-      background: linear-gradient(90deg, rgba(77,214,255,.18), rgba(0,227,154,.18));
+      background: linear-gradient(90deg, rgba(77,214,255,.16), rgba(0,227,154,.16));
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .topbar-inner{
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width:1100px;
+      margin:0 auto;
       padding: 14px 16px;
       display:flex;
       align-items:center;
@@ -50,12 +50,12 @@
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.2px;
       white-space:nowrap;
     }
     .brand img{
-      width:38px; height:38px; border-radius:50%;
+      width:40px; height:40px; border-radius:50%;
       object-fit:cover;
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -72,25 +72,21 @@
 
     .wrap{
       max-width:1100px;
-      margin: 0 auto;
+      margin:0 auto;
       padding: 18px 16px 40px;
     }
 
-    .hero{
+    .layout{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr;
       gap: 18px;
-      align-items:start;
       margin-top: 10px;
-    }
-    @media (max-width: 920px){
-      .hero{ grid-template-columns:1fr; }
     }
 
     .card{
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--r);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -99,28 +95,27 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
       background: linear-gradient(180deg, rgba(255,255,255,.06), transparent);
     }
-    .card-title{
+    .title{
       margin:0;
       font-size:18px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.2px;
     }
-    .card-sub{
+    .sub{
       margin:6px 0 0;
       font-size:13px;
       color: var(--muted);
       line-height:1.4;
     }
-    .card-body{
-      padding: 14px 16px 16px;
-    }
+    .card-body{ padding: 14px 16px 16px; }
 
     .row{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 220px;
       gap: 12px;
+      align-items:end;
     }
-    @media (max-width: 520px){
+    @media (max-width: 720px){
       .row{ grid-template-columns:1fr; }
     }
 
@@ -130,38 +125,126 @@
       color: var(--muted);
       margin-bottom:6px;
     }
-    input, select{
+    input{
       width:100%;
       padding: 12px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.28);
-      color: var(--text);
+      color: var(--txt);
       outline:none;
     }
     input::placeholder{ color: rgba(234,240,255,.45); }
-    input:focus, select:focus{
+    input:focus{
       border-color: rgba(77,214,255,.55);
       box-shadow: 0 0 0 3px rgba(77,214,255,.16);
     }
 
+    .selected{
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.35;
+      min-height: 46px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .selected b{
+      color: var(--txt);
+      font-weight:900;
+    }
+
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Cards “burbujas” */
+    .pack{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      border-radius: 18px;
+      padding: 14px 14px;
+      cursor:pointer;
+      text-align:left;
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease, background .14s ease;
+      position: relative;
+      overflow:hidden;
+      color: var(--txt);
+    }
+    .pack::before{
+      content:"";
+      position:absolute;
+      inset:-40px -40px auto auto;
+      width:120px;height:120px;
+      background: radial-gradient(circle at 30% 30%, rgba(77,214,255,.28), transparent 60%);
+      transform: rotate(20deg);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .pack:hover{
+      transform: translateY(-4px);
+      border-color: rgba(0,227,154,.55);
+      background: rgba(0,227,154,.08);
+      box-shadow: 0 18px 40px rgba(0,227,154,.12);
+    }
+    .pack:active{ transform: translateY(-1px) scale(.99); }
+
+    .pack.active{
+      border-color: rgba(0,227,154,.95);
+      background: rgba(0,227,154,.14);
+      box-shadow: 0 22px 50px rgba(0,227,154,.18);
+    }
+
+    .packTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .price{
+      margin-top: 10px;
+      font-weight:950;
+      color: var(--a);
+      font-size: 18px;
+    }
+
     .btn{
       width:100%;
-      margin-top: 12px;
+      margin-top: 14px;
       padding: 12px 14px;
       border:0;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      background: linear-gradient(90deg, var(--b), var(--a));
       color:#00130c;
-      font-weight:900;
+      font-weight:950;
       cursor:pointer;
-      transition: transform .08s ease;
     }
-    .btn:active{ transform: scale(.99); }
-    .btn:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-    }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
 
     .notice{
       display:flex;
@@ -183,6 +266,7 @@
       flex: 0 0 auto;
     }
 
+    /* Resultado / pedido */
     .result{
       display:none;
       margin-top: 14px;
@@ -190,11 +274,6 @@
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
-    }
-    .result h3{
-      margin:0 0 6px;
-      font-size:16px;
-      font-weight:900;
     }
     .code{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -204,12 +283,7 @@
       background: rgba(0,0,0,.35);
       border: 1px solid rgba(255,255,255,.12);
       letter-spacing:.8px;
-      font-weight:800;
-    }
-    .payline{
-      margin: 10px 0 10px;
-      color: var(--muted);
-      font-size:13px;
+      font-weight:900;
     }
 
     .paybox{
@@ -244,81 +318,32 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight:900;
+      color: var(--txt);
+      font-weight:950;
     }
     .badge.pending{ box-shadow: 0 0 0 3px rgba(255,204,102,.12); }
     .badge.ok{ box-shadow: 0 0 0 3px rgba(0,227,154,.12); }
     .badge.fail{ box-shadow: 0 0 0 3px rgba(255,90,90,.12); }
-
-    .prices{
-      margin-top: 18px;
-    }
-    .prices-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 16px 0;
-    }
-    .prices-head h2{
-      margin:0;
-      font-size:18px;
-      font-weight:900;
-    }
-    .prices-head p{
-      margin:0;
-      font-size:12px;
-      color: var(--muted);
-    }
-    .grid{
-      padding: 12px 16px 16px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 520px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    .price-card{
-      background: linear-gradient(180deg, rgba(77,214,255,.10), rgba(0,227,154,.08));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 14px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      min-height: 74px;
-    }
-    .price-left{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-    .price-pack{
-      font-weight:950;
-      letter-spacing:.2px;
-    }
-    .price-bs{
-      font-weight:950;
-      color: var(--accent);
-    }
-    .price-icon{
-      font-size:18px;
-      opacity:.95;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
 
     .footer{
       text-align:center;
       color: rgba(234,240,255,.45);
       font-size:12px;
       padding: 18px 0 10px;
+    }
+
+    .wa{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:99;
+      text-decoration:none;
+      background:#1fd189;
+      color:#00110a;
+      border-radius:999px;
+      padding: 12px 14px;
+      font-weight:950;
+      box-shadow: 0 18px 45px rgba(0,0,0,.45);
     }
   </style>
 </head>
@@ -330,17 +355,16 @@
         <img src="LOGO.jpeg" alt="Logo">
         <span>Recargas Free Fire Bolivia</span>
       </div>
-      <div class="pill">Pago por QR • Confirmación por estado</div>
+      <div class="pill">Bolivia • Pago QR • Estado en vivo</div>
     </div>
   </div>
 
   <div class="wrap">
-    <div class="hero">
-      <!-- COMPRA -->
+    <div class="layout">
       <div class="card">
         <div class="card-header">
-          <h1 class="card-title">Comprar recarga</h1>
-          <p class="card-sub">Ingresa el ID, elige el paquete y genera tu pedido.</p>
+          <h1 class="title">Comprar recarga</h1>
+          <p class="sub">Elige un paquete (burbujas), genera tu pedido y paga el monto exacto.</p>
         </div>
 
         <div class="card-body">
@@ -350,24 +374,32 @@
               <input id="jugador" placeholder="Ej: 4338630150" inputmode="numeric" />
             </div>
             <div>
-              <label for="monto">Paquete</label>
-              <select id="monto"></select>
+              <label>Paquete seleccionado</label>
+              <div class="selected">
+                <span id="selLabel">100 + 10 💎</span>
+                <b id="selBs">9 Bs</b>
+              </div>
             </div>
           </div>
+
+          <div class="grid" id="gridPaquetes"></div>
 
           <button class="btn" id="btn">Generar pedido</button>
 
           <div class="notice">
             <div class="dot"></div>
-            <div>
-              Paga <b>exactamente</b> el monto indicado. Luego espera a que el estado cambie.
-            </div>
+            <div>Escanea el QR y escribe el <b>monto exacto</b>. Luego espera a que el estado cambie.</div>
           </div>
 
           <div class="result" id="result">
-            <h3>Pedido creado</h3>
-            <div>Código: <span class="code" id="codigo">-</span></div>
-            <div class="payline" id="payline">Escanea el QR y paga exactamente <b>-</b> Bs</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <div><b>Código:</b> <span class="code" id="codigo">-</span></div>
+              <div class="pill" id="montoTxt">Monto: - Bs</div>
+            </div>
+
+            <div style="margin-top:10px;color:var(--muted);font-size:13px;">
+              Escanea el QR y paga exactamente <b id="montoBold">-</b> Bs
+            </div>
 
             <div class="paybox">
               <img src="QR.jpeg" alt="QR de pago">
@@ -378,123 +410,109 @@
               <div class="badge pending" id="estadoBadge">PENDIENTE</div>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- LISTA PRECIOS -->
-      <div class="card prices">
-        <div class="prices-head">
-          <div>
-            <h2>Paquetes disponibles</h2>
-            <p>Precios en Bs</p>
-          </div>
-          <div class="pill" id="countPacks">0 paquetes</div>
-        </div>
-        <div class="grid" id="grid"></div>
-      </div>
+      <div class="footer">© Bolivia Shop Center</div>
     </div>
-
-    <div class="footer">© Bolivia Shop Center</div>
   </div>
 
+  <a class="wa" target="_blank" rel="noopener"
+     href="https://wa.me/59164345952?text=Hola%20tengo%20duda%20con%20mi%20pedido">
+    WhatsApp Soporte
+  </a>
+
   <script>
-    // TU API (Google Apps Script)
     const API_URL = "https://script.google.com/macros/s/AKfycbwIuwqCE9Somn_ISJX7GheaBUls5xv6nY6MgF5npONYPc81BSLYeLDFMwHxWEE8F-1S/exec";
 
-    // Paquetes (los que me pasaste)
     const PACKS = [
-      { label: "100 + 10 💎",  bs: 9  },
-      { label: "310 + 31 💎",  bs: 30 },
-      { label: "520 + 52 💎",  bs: 41 },
-      { label: "1060 + 106 💎", bs: 81 },
-      { label: "2180 + 218 💎", bs: 162 },
-      { label: "5600 + 560 💎", bs: 395 },
-      { label: "Pase Booyah",   bs: 16 }
+      { label: "100 + 10 💎",  bs: 9,   tag: "Más vendido" },
+      { label: "310 + 31 💎",  bs: 30,  tag: "Rápido" },
+      { label: "520 + 52 💎",  bs: 41,  tag: "Bueno" },
+      { label: "1060 + 106 💎", bs: 81, tag: "Pro" },
+      { label: "2180 + 218 💎", bs: 162, tag: "Top" },
+      { label: "5600 + 560 💎", bs: 395, tag: "Mega" },
+      { label: "Pase Booyah",  bs: 16,  tag: "Especial" }
     ];
 
     const $ = (id) => document.getElementById(id);
 
-    const montoSel = $("monto");
-    const grid = $("grid");
-    const countPacks = $("countPacks");
-    const btn = $("btn");
-    const result = $("result");
-    const codigoEl = $("codigo");
-    const payline = $("payline");
-    const estadoBadge = $("estadoBadge");
-
+    let selectedIndex = 0;
     let pedidoID = "";
     let pollTimer = null;
 
-    function setBadge(text){
-      estadoBadge.textContent = text || "PENDIENTE";
-      estadoBadge.classList.remove("pending","ok","fail");
+    function setSelected(i){
+      selectedIndex = i;
+      const p = PACKS[i];
+      $("selLabel").textContent = p.label;
+      $("selBs").textContent = p.bs + " Bs";
 
-      const t = (text || "").toUpperCase();
-      if (t.includes("PEND")) estadoBadge.classList.add("pending");
-      else if (t.includes("OK") || t.includes("PAG") || t.includes("CONF") || t.includes("COMPLET")) estadoBadge.classList.add("ok");
-      else if (t.includes("CANC") || t.includes("ERR") || t.includes("FAIL") || t.includes("RECH")) estadoBadge.classList.add("fail");
-      else estadoBadge.classList.add("pending");
+      document.querySelectorAll(".pack").forEach(el => el.classList.remove("active"));
+      const active = document.querySelector(`.pack[data-i="${i}"]`);
+      if(active) active.classList.add("active");
     }
 
-    function render(){
-      // select
-      montoSel.innerHTML = PACKS.map(p =>
-        `<option value="${p.bs}">${p.label} — ${p.bs} Bs</option>`
-      ).join("");
-
-      // grid
-      grid.innerHTML = PACKS.map(p => `
-        <div class="price-card" role="button" tabindex="0" data-bs="${p.bs}">
-          <div class="price-left">
-            <div class="price-pack">${p.label}</div>
-            <div class="price-bs">${p.bs} Bs</div>
+    function renderPacks(){
+      const grid = $("gridPaquetes");
+      grid.innerHTML = PACKS.map((p, i) => `
+        <div class="pack ${i===0 ? "active" : ""}" data-i="${i}" role="button" tabindex="0">
+          <div class="packTop">
+            <span>${p.label}</span>
+            <span class="tag">${p.tag}</span>
           </div>
-          <div class="price-icon">💎</div>
+          <div class="price">${p.bs} Bs</div>
         </div>
       `).join("");
 
-      countPacks.textContent = PACKS.length + " paquetes";
-
-      // click en tarjeta => selecciona en combo
-      grid.querySelectorAll(".price-card").forEach(card => {
-        const pick = () => {
-          const bs = card.getAttribute("data-bs");
-          montoSel.value = bs;
-          // sube un poquito para que vea el botón
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        };
-        card.addEventListener("click", pick);
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); }
+      grid.querySelectorAll(".pack").forEach(el => {
+        const i = Number(el.getAttribute("data-i"));
+        const pick = () => setSelected(i);
+        el.addEventListener("click", pick);
+        el.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); }
         });
       });
+
+      setSelected(0);
     }
 
     async function apiCall(payload){
       const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type":"text/plain;charset=utf-8" },
+        method:"POST",
+        headers:{ "Content-Type":"text/plain;charset=utf-8" },
         body: JSON.stringify(payload)
       });
       return await res.json();
     }
 
+    function setBadge(text){
+      const el = $("estadoBadge");
+      el.textContent = text || "PENDIENTE";
+      el.classList.remove("pending","ok","fail");
+
+      const t = String(text || "").toUpperCase();
+      if(t.includes("PEND") || t.includes("PROCES")) el.classList.add("pending");
+      else if(t.includes("PAG") || t.includes("ENVIAD") || t.includes("OK")) el.classList.add("ok");
+      else if(t.includes("ERR") || t.includes("CANC") || t.includes("RECH")) el.classList.add("fail");
+      else el.classList.add("pending");
+    }
+
     async function generarPedido(){
       const jugador = $("jugador").value.trim();
-      const monto = Number(montoSel.value);
+      const pack = PACKS[selectedIndex];
+      const monto = pack.bs;
 
       if(!jugador){
         alert("Pon el ID del jugador.");
         return;
       }
 
+      const btn = $("btn");
       btn.disabled = true;
       btn.textContent = "Generando...";
 
       try{
-        // OJO: aquí uso action:"create" y datos básicos.
-        // Si tu Apps Script usa otros nombres (ej: "crear", "nuevo", "monto", etc), me mandas una captura del código del Apps Script y lo ajusto.
         const r = await apiCall({
           action: "create",
           jugador,
@@ -503,22 +521,17 @@
 
         if(!r || r.ok === false){
           alert("No se pudo crear el pedido. Revisa tu Apps Script.");
-          btn.disabled = false;
-          btn.textContent = "Generar pedido";
           return;
         }
 
-        // soporta varios formatos de respuesta
         pedidoID = r.id || r.pedido || r.codigo || "";
-        const codigoMostrar = r.codigo || pedidoID || "SIN-CODIGO";
+        $("codigo").textContent = pedidoID || "-";
+        $("montoTxt").textContent = "Monto: " + monto + " Bs";
+        $("montoBold").textContent = monto;
 
-        codigoEl.textContent = codigoMostrar;
-        payline.innerHTML = `Escanea el QR y paga exactamente <b>${monto}</b> Bs`;
-
-        result.style.display = "block";
+        $("result").style.display = "block";
         setBadge("PENDIENTE");
 
-        // iniciar polling
         startPolling();
 
       }catch(e){
@@ -530,30 +543,23 @@
     }
 
     function startPolling(){
-      if (pollTimer) clearInterval(pollTimer);
-      if (!pedidoID) return;
+      if(pollTimer) clearInterval(pollTimer);
+      if(!pedidoID) return;
 
       pollTimer = setInterval(async () => {
         try{
-          const r = await apiCall({
-            action: "check",
-            id: pedidoID
-          });
-
-          if(!r) return;
-
-          const estado = r.estado || r.status || "PENDIENTE";
+          const r = await apiCall({ action: "check", id: pedidoID });
+          const estado = r && (r.estado || r.status) ? (r.estado || r.status) : "PENDIENTE";
           setBadge(estado);
-
         }catch(e){
           // silencioso
         }
       }, 4000);
     }
 
-    btn.addEventListener("click", generarPedido);
+    $("btn").addEventListener("click", generarPedido);
 
-    render();
+    renderPacks();
   </script>
 </body>
 </html>

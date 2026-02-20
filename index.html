@@ -418,7 +418,12 @@
             <div class="paybox">
               <img src="QR.jpeg" alt="QR de pago">
             </div>
-
+<div style="margin-top:12px;">
+  <label>Subir comprobante (opcional)</label>
+  <input id="file" type="file" accept="image/*">
+  <button class="btn" type="button" onclick="subirComprobante()">Enviar comprobante</button>
+  <div id="upmsg" style="margin-top:10px; color: rgba(255,255,255,.75); font-size:13px;"></div>
+</div>
             <div class="status">
               <div>Estado</div>
               <div class="badge pending" id="estadoBadge">PENDIENTE</div>
@@ -438,7 +443,7 @@
   </a>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwIuwqCE9Somn_ISJX7GheaBUls5xv6nY6MgF5npONYPc81BSLYeLDFMwHxWEE8F-1S/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycby2GmZIR8DglC76-voQkiD8G06Ll2-OGPwo7FWN5He92oCft0uJ_azOS1jaHJ4E_Gdn/exec";
 
     const PACKS = [
       { label: "100 + 10 💎",  bs: 9 },
@@ -577,6 +582,7 @@
   </script>
 </body>
 </html>
+
 
 
 
